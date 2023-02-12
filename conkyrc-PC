@@ -1,0 +1,153 @@
+	
+conky.config = {
+
+	--Various settings
+
+	background = false, 							-- forked to background
+	cpu_avg_samples = 6,						-- The number of samples to average for CPU monitoring.
+	diskio_avg_samples = 10,					-- The number of samples to average for disk I/O monitoring.
+	double_buffer = true,						-- Use the Xdbe extension? (eliminates flicker)
+	if_up_strictness = 'address',				-- how strict if testing interface is up - up, link or address
+	net_avg_samples = 2,						-- The number of samples to average for net data
+	no_buffers = true,							-- Subtract (file system) buffers from used memory?
+	temperature_unit = 'celsius',				-- fahrenheit or celsius
+	text_buffer_size = 2048,					-- size of buffer for display of content of large variables - default 256
+	update_interval = 1,						-- update interval
+	imlib_cache_size = 0,                       -- disable image cache to get a new spotify cover per song
+
+
+	--Placement
+
+	alignment = 'middle_right',						-- top_left,top_middle,top_right,bottom_left,bottom_middle,bottom_right,
+												-- middle_left,middle_middle,middle_right,none
+	--Arch Duoscreen
+	--gap_x = -1910,
+	gap_x = -1920,								-- pixels between right or left border
+	gap_y = -50,								-- pixels between bottom or left border
+	minimum_height = 1200,						-- minimum height of window
+	minimum_width = 2010,						-- minimum height of window
+	maximum_width = 500,						-- maximum height of window
+
+	--Graphical
+
+	border_inner_margin = 10, 					-- margin between border and text
+	border_outer_margin = 5, 					-- margin between border and edge of window
+	border_width = 0, 							-- border width in pixels
+	default_bar_width = 600,					-- default is 0 - full width
+	default_bar_height = 600,					-- default is 6
+	default_gauge_height = 25,					-- default is 25
+	default_gauge_width =40,					-- default is 40
+	default_graph_height = 40,					-- default is 25
+	default_graph_width = 0,					-- default is 0 - full width
+	default_shade_color = '#000000',			-- default shading colour
+	default_outline_color = '#000000',			-- default outline colour
+	draw_borders = false,						-- draw borders around text
+	draw_graph_borders = true,					-- draw borders around graphs
+	draw_shades = false,						-- draw shades
+	draw_outline = false,						-- draw outline
+	stippled_borders = 0,						-- dashing the border
+
+	--Textual
+
+	extra_newline = false,						-- extra newline at the end - for asesome's wiboxes
+	format_human_readable = true,				-- KiB, MiB rather then number of bytes
+	font = 'ubuntu bold:size=8',  				-- font for complete conky unless in code defined
+	max_text_width = 0,							-- 0 will make sure line does not get broken if width too smal
+	max_user_text = 16384,						-- max text in conky default 16384
+	override_utf8_locale = true,				-- force UTF8 requires xft
+	short_units = true,							-- shorten units from KiB to k
+	top_name_width = 21,						-- width for $top name value default 15
+	top_name_verbose = false,					-- If true, top name shows the full command line of  each  process - Default value is false.
+	uppercase = false,							-- uppercase or not
+	use_spacer = 'none',						-- adds spaces around certain objects to align - default none
+	use_xft = true,								-- xft font - anti-aliased font
+	xftalpha = 1,								-- alpha of the xft font - between 0-1
+
+	--Windows
+
+	own_window = true,									  -- create your own window to draw
+	own_window_argb_value = 0,			 	   			  -- real transparency - composite manager required 0-255
+	own_window_argb_visual = true,				   		  -- use ARGB - composite manager required
+	own_window_colour = '#000000',						  -- set colour if own_window_transparent no
+	own_window_hints = 'sticky,skip_taskbar,skip_pager',  -- if own_window true - just hints - own_window_type sets it
+	own_window_transparent = false,						  -- if own_window_argb_visual is true sets background opacity 0%
+	own_window_title = '',						      -- set the name manually  - default conky "hostname"
+	own_window_type = 'normal',						  -- if own_window true options are: normal/override/dock/desktop/panel
+
+
+	--Colours
+
+	default_color = '#D9DDE2',  			-- default color and border color
+	color1 = '#DD6E0F',						--orange
+	color2 = '#FF0000',  					--red
+	color3 = '#fc08fc'
+
+    --Lua
+
+
+};
+
+
+
+conky.text = [[
+
+${color3}${offset 10}${font :size=10}J P C E 
+${color2}${voffset -10}${font :size=36}${offset 30}${alignc}${time %H:%M}${font}${color} 
+
+${color2}${voffset 4}${font :size=17}${alignc} ${time %A} ${time %e}. ${time %B} ${time %Y}${font}${color}
+
+#--
+#----------------------------------------System-------------------------------------------------------------------
+
+${color2}${font :size=13}${voffset 2}S Y S T E M   ${hr 2}${font}${color}
+
+${color1}${font :size=12}${offset 30}Laufzeit:${color1} ${alignr}${offset -30}${uptime}
+${color1}${offset 30}Kernel:${color1}${alignr}${offset -30}${exec uname} ${exec uname -r}
+#--
+#-----------------------------------------CPU----------------------------------------------------------------------
+
+${color2}${font :size=13}C P U  ${hr 2}${font}${color}
+
+${color1}${font :size=12}${offset 30}CPU Freq:${color1} ${alignr}${offset -30}${freq} MHz
+${color1}${offset 30}CPU Temp:${color1} $alignr${offset -30}${alignr}${offset -30}${acpitemp} °C
+																     ${color2}${hr 1}${font}                                   
+
+${color1}${font :size=12}${offset 30}CPU Core 1:${color1} ${alignr}${offset -150}${cpu cpu1}%${alignr}${offset -100}${cpugauge cpu1 15} ${color1}${offset 30}CPU Core 2:${color1} ${alignr}${offset -40}${cpu cpu2}%${alignr}${offset -30}${cpugauge cpu2 15}
+${color1}${font :size=12}${offset 30}CPU Core 3:${color1} ${alignr}${offset -150}${cpu cpu3}%${alignr}${offset -100}${cpugauge cpu3 15} ${color1}${offset 30}CPU Core 4:${color1} ${alignr}${offset -40}${cpu cpu4}%${alignr}${offset -30}${cpugauge cpu4 15}
+${color1}${font :size=12}${offset 30}CPU Core 5:${color1} ${alignr}${offset -150}${cpu cpu5}%${alignr}${offset -100}${cpugauge cpu5 15} ${color1}${offset 30}CPU Core 6:${color1} ${alignr}${offset -40}${cpu cpu6}%${alignr}${offset -30}${cpugauge cpu6 15}
+#--
+#-----------------------------------------GPU---------------------------------------------------------------------
+
+${color2}${font :size=13}G P U   ${hr 2}${font}${color}
+${color1}${font :size=12}${offset 30}GPU Freq:			${color1}${alignr}${offset -30}${exec grep -Po '\d+:\s\K(\d+)(?=.*\*$)' /sys/class/drm/card0/device/pp_dpm_sclk} MHz
+${color1}${font :size=12}${offset 30}GPU Temp:			${color1}${alignr}${offset -30}${hwmon 2 temp 1} °C
+																     ${color2}${hr 1}${font}                                   
+${color1}${font :size=12}${offset 30}GPU Auslastung: 	${color1}${alignr}${offset -30}${exec cat /sys/class/drm/card0/device/gpu_busy_percent} %
+${color1}${font :size=12}${offset 30}VRAM:     			${color1}${alignr}${offset -150}${exec numfmt --to=iec < /sys/class/drm/card0/device/mem_info_vram_used}B${color1}${font :size=12}${offset 175}Vram Freq: 		${color1}${alignr}${offset -20}${exec grep -Po '\d+:\s\K(\d+)(?=.*\*$)' /sys/class/drm/card0/device/pp_dpm_mclk} MHz 
+#--
+#------------------------------------------Ram--------------------------------------------------------------------
+
+${color2}${font :size=13}R A M   ${hr 2}${font}${color}
+
+${color1}${font :size=12}${offset 30}RAM: ${color1}${alignr}${offset -40}${mem} / ${memmax}${alignr}${offset -30}${membar 15,80}
+${color1}${font :size=12}${offset 30}Swap:${color1}${alignr}${offset -40}${swap} / ${swapmax}${alignr}${offset -30}${swapbar 15,80}
+#--
+#---------------------------------------Speicher------------------------------------------------------------------
+
+${color2}${font :size=13}S P E I C H E R   ${hr 2}${font}${color}
+
+${color1}${font :size=12}${offset 30}Begelgt: ${color1}${alignr}${offset -30}${fs_used /}B
+${color1}${font :size=12}${offset 30}Frei:    ${color1}${alignr}${offset -30}${fs_free /}B
+#--
+#---------------------------------------Netzwerk------------------------------------------------------------------
+
+${color2}${font :size=13}N E T Z W E R K   ${hr 2}${font}${color}
+
+${color1}${font :size=12}${offset 30}IPV4: ${color1}${alignr}${offset -30}${addrs enp38s0}
+																	 ${color2}${hr 1}${font} 
+																	 
+${color1}${font :size=12}${offset 30}Upload:     ${color1} ${alignr}${offset -40$}${upspeed enp38s0}${alignr}${offset -30}${upspeedgraph enp38s0 15,80}
+${color1}${font :size=12}${offset 30}Download:	${color1} ${alignr}${offset -40$}${downspeed enp38s0}${alignr}${offset -30}${downspeedgraph enp38s0 15,80}
+#--
+
+]];
